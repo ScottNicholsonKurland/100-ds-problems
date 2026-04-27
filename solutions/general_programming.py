@@ -1,118 +1,285 @@
-"""
-General Programming Solutions.
+"""Reference solutions for the General Programming problem set.
 
-This module contains answers to the quesions in the General Programming section
-of the 100 Data Science questions set.
+The functions in this module favor readable implementations and explicit edge
+case handling over excessive cleverness.
 """
+
+from __future__ import annotations
 
 from collections import defaultdict
-from itertools import repeat
-
-import numpy as np
-
-"""
-1.  Write a function that converts a dictionary of equal length lists into a
-    list of dictionaries.
-
-    {'a': [1, 2, 3], 'b': [3, 2, 1]}
-    => [{'a': 1, 'b': 3}, {'a': 2, 'b': 2}, {'a': 3, 'b': 1}]
-"""
+from collections.abc import Iterable, Sequence
+from pathlib import Path
+from typing import Any
 
 
-def dict_to_list(dictionary):
-    """
-    Convert a dictionary of equal length lists into a list of dictionaries.
+VOWELS = set("aeiouAEIOU")
+PASSWORD_SYMBOLS = set("^!#$?-")
 
-    Args:
-        dictionary (dict): A dictionary of equal length lists.
 
-    Returns:
-        output (list): A list of dictionaries.
+def dict_to_list(data: dict[str, Sequence[Any]]) -> list[dict[str, Any]]:
+    """Convert a dictionary of equal-length sequences into row dictionaries."""
+    lengths = {len(values) for values in data.values()}
+    if len(lengths) > 1:
+        raise ValueError("All values must have the same length.")
 
-    Example:
-        >>> dict_to_list({'a': [1, 2, 3], 'b': [3, 2, 1]})
-        [{'a': 1, 'b': 3}, {'a': 2, 'b': 2}, {'a': 3, 'b': 1}]
-    """
-    zippers = []
-    for key, value in dictionary.items():
-        zippers.append(zip(repeat(key), value))
-    output = []
-    for zipper in zip(*zippers):
-        output.append(dict(zipper))
+    keys = list(data)
+    return [dict(zip(keys, row_values)) for row_values in zip(*data.values())]
+
+
+def list_to_dict(rows: Sequence[dict[str, Any]]) -> dict[str, list[Any]]:
+    """Convert a list of row dictionaries into a dictionary of columns."""
+    if not rows:
+        return {}
+
+    expected_keys = set(rows[0])
+    output: dict[str, list[Any]] = {key: [] for key in rows[0]}
+
+    for row in rows:
+        if set(row) != expected_keys:
+            raise ValueError("All dictionaries must contain the same keys.")
+        for key, value in row.items():
+            output[key].append(value)
+
     return output
 
 
-"""
-2.  Write the inverse function to the previous problem. Convert a list of
-    dictionaries into a dictionary of equal length lists.
+def either_vowel_flags(left: Sequence[str], right: Sequence[str]) -> list[bool]:
+    """Return True where either same-index character is a vowel."""
+    if len(left) != len(right):
+        raise ValueError("Input sequences must have the same length.")
 
-    [{'a': 1, 'b': 3}, {'a': 2, 'b': 2}, {'a': 3, 'b': 1}]
-    => {'a': [1, 2, 3], 'b': [3, 2, 1]}
-"""
+    return [(a in VOWELS) or (b in VOWELS) for a, b in zip(left, right)]
 
 
-def list_to_dict(list_of_dicts):
+def group_words_by_first_letter(text: str) -> dict[str, list[str]]:
+    """Group words from a string by their first letter."""
+    grouped: dict[str, list[str]] = defaultdict(list)
+
+    for word in text.split():
+        grouped[word[0]].append(word)
+
+    return dict(sorted(grouped.items()))
+
+
+def merge_word_files(
+    first_input: str | Path,
+    second_input: str | Path,
+    output_file: str | Path,
+) -> None:
+    """Merge two one-word-per-line files into alphabetized comma-paired lines.
+
+    If one file is longer, the remaining single words are written one per line.
     """
-    Convert a list of dictionaries into a dictionary of equal length lists.
+    first_words = Path(first_input).read_text(encoding="utf-8").splitlines()
+    second_words = Path(second_input).read_text(encoding="utf-8").splitlines()
 
-    Args:
-        list_of_dicts (list): A list of dictionaries.
+    max_length = max(len(first_words), len(second_words))
+    output_lines: list[str] = []
 
-    Returns:
-        output (dict): A dictionary of equal length lists.
+    for index in range(max_length):
+        pair = []
+        if index < len(first_words):
+            pair.append(first_words[index])
+        if index < len(second_words):
+            pair.append(second_words[index])
+        output_lines.append(", ".join(sorted(pair, key=str.casefold)))
 
-    Example:
-        >>> my_list = [{'a': 1, 'b': 3}, {'a': 2, 'b': 2}, {'a': 3, 'b': 1}]
-        >>> list_to_dict(my_list)
-        {'a': [1, 2, 3], 'b': [3, 2, 1]}
-    """
-    output = defaultdict(list)
-    for dict_ in list_of_dicts:
-        for key, value in dict_.items():
-            dict_[key].append(value)
-    return dict(output)
+    Path(output_file).write_text("\n".join(output_lines) + "\n", encoding="utf-8")
 
 
-"""
-3.  Given a list of numbers representing the coefficients in a polynomial
-    (largest powers first), write a function that returns a pretty string
-    representation of the polynomial.
+def transpose(matrix: Sequence[Sequence[Any]]) -> list[list[Any]]:
+    """Transpose a rectangular list-of-lists matrix."""
+    if not matrix:
+        return []
 
-    [1, 1, 1] => "x^2 + x + 1"
-    [2, -1, -2] => "2x^2 - x - 2"
-    [0, 9, -10] => "9x - 10"
-"""
+    row_lengths = {len(row) for row in matrix}
+    if len(row_lengths) > 1:
+        raise ValueError("Matrix must be rectangular.")
+
+    return [list(column) for column in zip(*matrix)]
 
 
-def list_to_poly(polynomial_list):
-    """
-    Create pretty string representation from list of polynomials.
+def get_valid_passwords(passwords: Iterable[str]) -> list[str]:
+    """Return passwords containing at least one digit and one required symbol."""
+    return [
+        password
+        for password in passwords
+        if any(character.isdigit() for character in password)
+        and any(character in PASSWORD_SYMBOLS for character in password)
+    ]
 
-    Convert a list of numbers representing the coefficients in a polynomial
-    into a pretty representation of the polynomial.
 
-    Args:
-        polynomial_list (list): A list of integers.
+def polynomial_to_string(coefficients: Sequence[int | float]) -> str:
+    """Convert coefficients ordered high-to-low into a readable polynomial."""
+    terms: list[tuple[str, str]] = []
+    degree = len(coefficients) - 1
 
-    Returns:
-        output (string): A pretty string representation of the polynomial.
+    for offset, coefficient in enumerate(coefficients):
+        power = degree - offset
 
-    Example:
-        >>> list_to_poly([1, 1, 1])
-        "x^2 + x + 1"
-        >>> list_to_poly([2, -1, -2])
-        "2x^2 - x - 2"
-    """
-    max_degree = len(polynomial_list) - 1
-    strings = []
-    opts = ['x', '']
-    for index, num in enumerate(polynomial_list):
-        if num == 0:
+        if coefficient == 0:
             continue
-        if index < max_degree - 1:
-            string = '{}x^{}'.format(num, max_degree - index)
-            strings.append(string)
+
+        sign = "-" if coefficient < 0 else "+"
+        absolute = abs(coefficient)
+
+        if power == 0:
+            body = f"{absolute:g}"
+        elif power == 1:
+            body = "x" if absolute == 1 else f"{absolute:g}x"
         else:
-            strings.append(str(num) + opts[index - (max_degree - 1)])
-    polynomial = ' + '.join(strings).replace('+ -', '- ')
-    return polynomial
+            body = f"x^{power}" if absolute == 1 else f"{absolute:g}x^{power}"
+
+        terms.append((sign, body))
+
+    if not terms:
+        return "0"
+
+    first_sign, first_body = terms[0]
+    output = f"-{first_body}" if first_sign == "-" else first_body
+
+    for sign, body in terms[1:]:
+        output += f" {sign} {body}"
+
+    return output
+
+
+def simplify_polynomial(
+    polynomial: Iterable[tuple[int | float, int]],
+) -> list[tuple[int | float, int]]:
+    """Combine polynomial terms with like degree and drop zero coefficients.
+
+    Polynomials are represented as ``(coefficient, degree)`` tuples.
+    """
+    terms: dict[int, int | float] = defaultdict(int)
+
+    for coefficient, degree in polynomial:
+        terms[degree] += coefficient
+
+    return [
+        (coefficient, degree)
+        for degree, coefficient in sorted(terms.items())
+        if coefficient != 0
+    ]
+
+
+def differentiate_polynomial(
+    polynomial: Iterable[tuple[int | float, int]],
+) -> list[tuple[int | float, int]]:
+    """Differentiate and simplify a polynomial represented as term tuples."""
+    derivative = [
+        (coefficient * degree, degree - 1)
+        for coefficient, degree in polynomial
+        if degree > 0 and coefficient != 0
+    ]
+
+    return simplify_polynomial(derivative)
+
+
+def split_into_words(text: str, language: set[str]) -> list[str]:
+    """Return all possible segmentations of text into words from language."""
+    memo: dict[str, list[list[str]]] = {"": [[]]}
+
+    def segment(suffix: str) -> list[list[str]]:
+        if suffix in memo:
+            return memo[suffix]
+
+        matches: list[list[str]] = []
+
+        for word in sorted(language):
+            if suffix.startswith(word):
+                for rest in segment(suffix[len(word) :]):
+                    matches.append([word, *rest])
+
+        memo[suffix] = matches
+        return matches
+
+    return [" ".join(words) for words in segment(text)]
+
+
+def solve_sudoku(grid: Sequence[Sequence[int]]) -> list[list[int]] | None:
+    """Solve a 9x9 Sudoku puzzle with backtracking.
+
+    Empty cells should be represented with 0. Returns a solved grid, or None if
+    no solution exists.
+    """
+    board = [list(row) for row in grid]
+
+    if len(board) != 9 or any(len(row) != 9 for row in board):
+        raise ValueError("Sudoku grid must be 9x9.")
+
+    def candidates(row: int, column: int) -> set[int]:
+        used = set(board[row])
+        used.update(board[r][column] for r in range(9))
+
+        box_row = 3 * (row // 3)
+        box_column = 3 * (column // 3)
+        used.update(
+            board[r][c]
+            for r in range(box_row, box_row + 3)
+            for c in range(box_column, box_column + 3)
+        )
+
+        return set(range(1, 10)) - used
+
+    def find_empty_cell() -> tuple[int, int] | None:
+        best_cell = None
+        best_count = 10
+
+        for row in range(9):
+            for column in range(9):
+                if board[row][column] == 0:
+                    count = len(candidates(row, column))
+                    if count < best_count:
+                        best_cell = (row, column)
+                        best_count = count
+
+        return best_cell
+
+    def backtrack() -> bool:
+        cell = find_empty_cell()
+
+        if cell is None:
+            return True
+
+        row, column = cell
+
+        for value in sorted(candidates(row, column)):
+            board[row][column] = value
+            if backtrack():
+                return True
+            board[row][column] = 0
+
+        return False
+
+    return board if backtrack() else None
+
+
+def merge_overlapping_sets(sets_: Iterable[set[Any]]) -> list[set[Any]]:
+    """Merge sets sharing elements until all resulting sets are disjoint.
+
+    The original set objects are not modified.
+    """
+    groups = [set(group) for group in sets_]
+    changed = True
+
+    while changed:
+        changed = False
+        merged_groups: list[set[Any]] = []
+
+        while groups:
+            current = groups.pop(0)
+            overlapping = [group for group in groups if current & group]
+            non_overlapping = [group for group in groups if not current & group]
+
+            if overlapping:
+                for group in overlapping:
+                    current |= group
+                changed = True
+
+            merged_groups.append(current)
+            groups = non_overlapping
+
+        groups = merged_groups
+
+    return groups
