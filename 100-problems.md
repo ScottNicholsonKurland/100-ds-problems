@@ -5,35 +5,35 @@ Data Science Programming Problems
 General Programming
 -------------------
 
-1. Write a function that converts a dictionary of equal length lists into a list of dictionaries.
+1. Write a function that converts a dictionary of equal-length lists into a list of dictionaries.
 
     ```
     {'a': [1, 2, 3], 'b': [3, 2, 1]}
     => [{'a': 1, 'b': 3}, {'a': 2, 'b': 2}, {'a': 3, 'b': 1}]
     ```
 
-1. Write the inverse function to the previous problem, convert a list of dictionaries into a dictionary of equal length lists.
+1. Write the inverse function to the previous problem, and convert a list of dictionaries into a dictionary of equal-length lists.
 
     ```
     [{'a': 1, 'b': 3}, {'a': 2, 'b': 2}, {'a': 3, 'b': 1}]
     => {'a': [1, 2, 3], 'b': [3, 2, 1]}
     ```
 
-1. Given two lists of characters with the same length, write a function that returns a list of booleans, also of the same length.  The value in the return list should be True if *either* of the characters in the two lists at that index are vowels, otherwise it should return false.
+1. Given two lists of characters with the same length, write a function that returns a list of booleans, also of the same length.  The value in the return list should be True if *either* of the characters in the two lists at that index is a vowel, otherwise it should return False.
 
    ```
    (['a', 'b', 'c', 'd', 'e'], ['v', 'w', 'x', 'y', 'z'])
    => [True, False, False, False, True]
    ```
 
-1. Write a function that takes a string, and returns a dictionary that keys a list of words in the string according to the first letter in the word.
+1. Write a function that takes a string and returns a dictionary that keys a list of words in the string according to the first letter in the word.
 
    ```
    "a special string bearing an important salutation"
    => {'a': ['a', 'an'], 'b': ['bearing'], 'i': ['important'], 's': ['special', 'string', 'salutation']}
    ```
 
-1. Write a function that reads lines from two files, and writes out a new file.  You may assume that each line in the input files contain a single word.  The output file should have the words concatenated with a comma, but the two words on each line should be in alphabetical order.  If the input files have different lengths, write single words to the output file until the longer file is exhausted.
+1. Write a function that reads lines from two files and writes out a new file.  You may assume that each line in the input files contains a single word.  The output file should have the words concatenated with a comma, but the two words on each line should be in alphabetical order.  If the input files have different lengths, write single words to the output file until the longer file is exhausted.
 
     ```
     File 1:  File2:
@@ -53,7 +53,7 @@ General Programming
     words
     ```
 
-1. Given a list of equal length lists, transpose it.
+1. Given a list of equal-length lists, transpose it.
 
     ```
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
@@ -92,7 +92,7 @@ get_valid_passwords(possible_passwords)
     [(1, 0), (1, 1), (1, 0), (1, 1)] => 1 + x + 1 + x
     ```
 
-Write a python function to simplify these polynomial data structures by combining terms with like degree. 
+Write a Python function to simplify these polynomial data structures by combining terms with like degree. 
 
     ```
     simplify_polynomial([(1, 0), (1, 1), (1, 2)])
@@ -116,7 +116,7 @@ Notice that if a term in the simplified polynomial has degree zero, you should r
         => [(1, 1)]
     ```
 
-1. Given a set containing a language of words (here we are using "language" in a technical sense, meaning "the collection of all words relevant to a task"), write a function that consumes a string of concatenated words, and returns a list of strings.  The strings in the output list should contain space separated words, where each space separated word is contained in the set defining the language.  For example:
+1. Given a set containing a language of words (here we are using "language" in a technical sense, meaning "the collection of all words relevant to a task"), write a function that consumes a string of concatenated words, and returns a list of strings.  The strings in the output list should contain space-separated words, where each space-separated word is contained in the set defining the language.  For example:
 
     ```
     language = {"number", "numbers", "ship", "ships", 
@@ -132,17 +132,17 @@ Notice that if a term in the simplified polynomial has degree zero, you should r
 	    'numbers hips wear']
     ```	
 
-1. A [Sudoku](https://en.wikipedia.org/wiki/Sudoku) puzzle is a nine by nine array intended to be filled with digits.  Initially, many of the cells in the array are empty, with a few containing initial digits.  The goal of the puzzle is to fill in the entire array, each cell with a digit (one through nine inclusive) so that the following rules are satisfied:
+1. A [Sudoku](https://en.wikipedia.org/wiki/Sudoku) puzzle is a nine-by-nine array intended to be filled with digits.  Initially, many of the cells in the array are empty, with a few containing initial digits.  The goal of the puzzle is to fill in the entire array, each cell with a digit (one through nine inclusive), so that the following rules are satisfied:
 
   - Each row in the array contains each digit exactly one time.
   - Each column in the array contains each digit exactly one time.
-  - Each of the nine three by three subarrays along the edges and in the center contain each digit exactly once.
+  - Each of the nine three-by-three subarrays along the edges and in the center contains each digit exactly once.
 
-Write a program that solves sudoku puzzles.  Good examples of puzzles may be found at [web sudoku](https://www.websudoku.com/).
+Write a program that solves Sudoku puzzles.  Good examples of puzzles may be found at [web sudoku](https://www.websudoku.com/).
 
-This problem is impossible to brute force search, so you will need a good solution strategy.  A common solution method for this problem is [backtracking](https://en.wikipedia.org/wiki/Backtracking).
+This problem is impossible to brute-force search, so you will need a good solution strategy.  A common solution method for this problem is [backtracking](https://en.wikipedia.org/wiki/Backtracking).
 
-1. Given a list of sets containing overlapping elements, write a function that returns a list of merged sets, such that any two sets sharing one or more elements are replaced into the union of these sets, repeatedly, until all sets are disjoint. The function should not change the original set objects.
+1. Given a list of sets containing overlapping elements, write a function that returns a list of merged sets, such that any two sets sharing one or more elements are replaced by the union of these sets, repeatedly, until all sets are disjoint. The function should not change the original set of objects.
     ```
     [{1, 2}, {3}, {2, 4}, {4, 6, 7}, {8}, {3, 9}] => [{1, 2, 4, 6, 7}, {3, 9}, {8}]
     ```
@@ -156,7 +156,7 @@ Data Manipulation - Numpy
     np.array([0, 0, 1, 0, 1]) => np.array(["red", "red", "blue", "red", "blue"])
     ```
 
-1.  Given two equal length arrays, `x` with general numeric data, and `b` with only 0's and 1's, compute the mean of the data in `x` at the positions where `b == 0` and the mean of the data in `x` at the positions where `b == 1`.
+1.  Given two equal-length arrays, `x` with general numeric data, and `b` with only 0's and 1's, compute the mean of the data in `x` at the positions where `b == 0` and the mean of the data in `x` at the positions where `b == 1`.
 
     ```
     x = np.array([1, 2, 3, 4, 5])
@@ -174,7 +174,7 @@ Data Manipulation - Numpy
         => np.array([1.0, 1.0])
     ```
 
-1.  Given an array `x`, and a matrix `M` (two dimensional array) with the same number of columns as the length of `x`, find the row in `M` that makes the smallest angle with `x`.
+1.  Given an array `x`, and a matrix `M` (two-dimensional array) with the same number of columns as the length of `x`, find the row in `M` that makes the smallest angle with `x`.
 
 1.  Given a number `n`, create a matrix of zeros, but with ones on the diagonals immediately below and above the main diagonal.  For example, when `n=5`, you should create the following matrix
 
@@ -231,11 +231,11 @@ Data Manipulation - Numpy
 Data Manipulation - Pandas
 --------------------------
 
-1. You have a pandas DataFrame `berries` which contains columns `type` and `size`.  Select all the (rows representing) blueberries larger than 0.5 cm in size.
+1. You have a pandas DataFrame `berries` which contains columns `type` and `size`.  Select all the rows representing blueberries larger than 0.5 cm in size.
 
 1. You have a pandas DataFrame `berries` which contains columns `type` and `size`.  Create a dataframe containing the largest berry of each type.
 
-1. You have a pandas DataFrame containing observations of stock prices over time, it contains columns `stock`, `day` and `price`.  Create a data frame that contains the stock price for each stock on the *day after* they achieve their maximum price.
+1. You have a pandas DataFrame containing observations of stock prices over time, which contains columns `stock`, `day`, and `price`.  Create a data frame that contains the stock price for each stock on the *day after* they achieve their maximum price.
 
 
 Probability
@@ -247,7 +247,7 @@ Probability
   - The remaining cards are nothing special.
     You draw an initial hand of five cards, after which you *must* discard any of the star cards for an additional three cards drawn from the top of the deck.  This process is repeated until you find yourself with a hand that does *not* contain any star cards.  Write a simulation to approximate the probability that your initial draw results in a final hand containing a diamond card. 
 
-1. Use a built in function which samples data from a uniform distribution (for example `np.random.uniform` in python), to generate samples from the exponential distribution with a given parameter.  To start, consider reading about the [inverse sampling method](https://en.wikipedia.org/wiki/Inverse_transform_sampling).  Plot a histogram of data sampled using your code, and overlay the density function of an exponential distribution.
+1. Use a built-in function which samples data from a uniform distribution (for example, `np.random.uniform` in Python), to generate samples from the exponential distribution with a given parameter.  To start, consider reading about the [inverse sampling method](https://en.wikipedia.org/wiki/Inverse_transform_sampling).  Plot a histogram of data sampled using your code, and overlay the density function of an exponential distribution.
 
 1. Write a function that samples random data from a true simple linear model with a given intercept, slope, and residual standard deviation.  Your function should additionally consume an array `x` containing data for the independent variable of the model:
 
@@ -257,13 +257,13 @@ Probability
 
     The function should return the sampled `y` values.
 
-1. You visit a website that provides amusing data-science jokes. Each time you visit it displays a joke randomly chosen from a finite set. Over the course of four visits, you see three unique jokes and one repeat. Using maximum likelihood estimation, estimate the total number of jokes on the website.
+1. You visit a website that provides amusing data-science jokes. Each time you visit, it displays a joke randomly chosen from a finite set. Over the course of four visits, you see three unique jokes and one repeat. Using maximum likelihood estimation, estimate the total number of jokes on the website.
 
 
 Statistics
 ----------
 
-1. Write a function that computes the p-value from a one tailed exact binomial test for a population proportion.  Your function should have the following signature:
+1. Write a function that computes the p-value from a one-tailed exact binomial test for a population proportion.  Your function should have the following signature:
 
     ```
     def binomial_exact_test(n_samples, n_positive_samples, proposed_value)
@@ -278,12 +278,12 @@ Statistics
 
     Where `p` is the population proportion.
 
-    You may utilize a built in function that computes the pmf or cmf of the Binomial distribution.
+    You may utilize a built-in function that computes the pmf or cmf of the Binomial distribution.
 
 
 1. You are running a popular role-playing game. In it, the players create characters that have randomly generated values for 6 different attributes, each found by summing the rolls of three 6-sided dice, so each attribute will range from 3 to 18 (higher is better).
 
-To save time you have each person generate their own characters before you get together, but you are worried some of them might cheat. Design a frequentist a/b test to investigate this. Consider the ways in which someone might cheat (in particular, cheaters don't want to get caught and might care more about some attributes than others).  Write your process into a function that consumes a dictionary of atrribute stats:
+To save time, you have each person generate their own characters before you get together, but you are worried some of them might cheat. Design a frequentist a/b test to investigate this. Consider the ways in which someone might cheat (in particular, cheaters don't want to get caught and might care more about some attributes than others).  Write your process into a function that consumes a dictionary of attribute stats:
 
     ```
     test_for_cheating({'STR': 11, 'DEX': '14', 'CON': 10,
@@ -302,15 +302,15 @@ Algorithms
   - A function `df: np.array => np.array` that maps a numpy array to another numpy array, this is the gradient of `f`.
   - An initial point `_0x`, stored as a numpy array.
   - A learning rate `learning_rate`, a floating point number.
-  - A `tolerance`, floating point number.
+  - A `tolerance`, a floating-point number.
 
-    Write an iterator `gradient_descent` (i.e. like a function, but uses `yield`) that generates the sequence of points by applying gradiend descent to the function `f`, starting at the initial point `x_0`, with the learning rate `learning_rate`, until the convergence tolerance `tolerance` is met.
+    Write an iterator `gradient_descent` (i.e., like a function, but uses `yield`) that generates the sequence of points by applying gradient descent to the function `f`, starting at the initial point `x_0`, with the learning rate `learning_rate`, until the convergence tolerance `tolerance` is met.
 
     ```
     gradient_descent(f, df, x_0, learning_rate=0.01, tolerance=0.01)
     ```
 
-2. In the same situation of the previous problem, except with the extra data
+2. In the same situation as the previous problem, except with the extra data
 
   - A function `ddf: np.array => np.array` that maps a numpy array to a matrix, this is the second derivative of `f`.
 
@@ -333,19 +333,19 @@ Algorithms
 
     To fit the regression, use a linear equation solver to explicitly solve the matrix equation `X^t X beta = X^t y` for beta.
 
-1. Fit a logistic regression to `X_train` and `y_train`, then compute and return the proportion of data in `X_test` and `y_test` that are correctly classified when threasholding the predicted probabilities with `threas`.
+1. Fit a logistic regression to `X_train` and `y_train`, then compute and return the proportion of data in `X_test` and `y_test` that are correctly classified when thresholding the predicted probabilities with `threas`.
 
     ```
     def logistic_accuracy(X_train, y_train, X_test, Y_test, thres)
     ```
 
-1. Fit a logistic regression and return the maximal profit that can be achieved by classifying predicted probabilities for observations from a test set.  The profits/costs of true/false positives and true/false negatives are supplied in a two by two `profit_matrix` (profits are positive numbers, costs are negative numbers).
+1. Fit a logistic regression and return the maximal profit that can be achieved by classifying predicted probabilities for observations from a test set.  The profits/costs of true/false positives and true/false negatives are supplied in a two-by-two `profit_matrix` (profits are positive numbers, costs are negative numbers).
 
     ```
     def logistic_profit(X_train, y_train, X_test, Y_test, profit_matrix)
     ```
 
-1. Write a class that implements *peicewise linear regression*.  This is a linear regression, but instead of fitting a single line to the data, it fits various lines of changing slope that join up continuously.  
+1. Write a class that implements *piecewise linear regression*.  This is a linear regression, but instead of fitting a single line to the data, it fits various lines of changing slope that join up continuously.  
 
 ![Piecewise Linear Regression](img/pw-regression.png)
 
@@ -354,11 +354,11 @@ The points where it changes slope are called *knots*.  Your class should have th
     ```
     class PWLinearRegression(object):
         """
-        Fit piecewise linear regression on data.
+        Fit a piecewise linear regression on the data.
         
         Parameters
         -------
-        Knots : Array
+        Knots: Array
             Knot locations.
         """
         def __init__(self, knots):
@@ -366,22 +366,22 @@ The points where it changes slope are called *knots*.  Your class should have th
             
         def fit(self, x, y):
             """
-            Fit piecewise linear model.
+            Fit a piecewise linear model.
             
             Parameters
             ----------
-            x : 1D numpy array of data inputs
-            y : 1D numpy array of data responses
+            x: 1D numpy array of data inputs
+            y: 1D numpy array of data responses
             """
             pass
             
         def predict(self, x):
             """
-            Make predictions with fit model.
+            Make predictions with a fit model.
             
             Parameters
             ----------
-            x : int, float, 1D array/list type of model prediction inputs.
+            x: int, float, 1D array/list type of model prediction inputs.
             
             Returns
             -------
@@ -399,14 +399,14 @@ Feel free to use any numpy or sklearn methods.
 The distribution of data above has the following interesting structure:
 
   - A large amount of the data is *exactly* zero.
-  - Conditional on not being zero, the data follows some other distribution (in this case a continuous gamma distribution.
+  - Conditional on not being zero, the data follows some other distribution (in this case, a continuous gamma distribution.
 
 A hurdle model is a compound model for this type of data:
 
   - A logistic regression is used to predict the probability that a new data point falls in the zero spike, or is included in the rest of the distribution.
-  - Another model is ures to predict the target given that it is not in the spike.  A linear regression is a common choice for this model.
+  - Another model is used to predict the target given that it is not in the spike.  A linear regression is a common choice for this model.
 
-Given that these two models are fit, the overall prediction form the hurdle model is the conditional expectation, i.e. the predicted probability from the logistic model *times* the prediction from the second model.
+Given that these two models are fit, the overall prediction from the hurdle model is the conditional expectation, i.e., the predicted probability from the logistic model *times* the prediction from the second model.
 
 Write an implementation of a hurdle model.  Use a class, and follow the sklearn style for model structures.
 
@@ -416,7 +416,7 @@ Plotting
 
 1.  Using your function that creates sample data from a simple linear model, superimpose the true linear model onto a scatterplot of the generated data. 
 
-1. Create a (2, 3) grid of plots.  Inside each plot display the coordinates of the plot, like so:
+1. Create a (2, 3) grid of plots.  Inside each plot, display the coordinates of the plot, like so:
 
     ```
     +----------+----------+----------+
@@ -426,7 +426,7 @@ Plotting
     +----------+----------+----------+
     ```
 
-1. Given a list pairs of ordered pairs, like so:
+1. Given a list of ordered pairs, like so:
 
     ```
     [[(0, 1), (1, 0)], [(1, 1), (2, 2)], [(-1, 0), (0, -1)]]
@@ -438,7 +438,7 @@ Plotting
 SQL
 ---
 
-The following problems use tables with the following table schemas for a database keeping records of checkouts for library patrons and books.  This is only a selection of tables in the database, there are possibly many more.
+The following problems use tables with the following table schemas for a database keeping records of checkouts for library patrons and books.  This is only a selection of tables in the database; there are possibly many more.
 
 #### Users
 
@@ -471,11 +471,11 @@ The following problems use tables with the following table schemas for a databas
 The `return_time` field may be `null` in the case that the book has not yet been returned.
 
 
-1. Write a query that returns all the users (by name) that have checked out a book within the last month.
+1. Write a query that returns all the users (by name) who have checked out a book within the last month.
 
-1. Write a query that returns all the users (by name) that have a currently checked out book.
+1. Write a query that returns all the users (by name) who have a currently checked-out book.
 
-1. Assuming that the checkout time for a book is one month, write a query returning all users (by name) that have an overdue book.  Summarize this data to produce a list of possibly stolen books (you will have to come up with a reasonable interpretation of what this means).
+1. Assuming that the checkout time for a book is one month, write a query returning all users (by name) who have an overdue book.  Summarize this data to produce a list of possibly stolen books (you will have to come up with a reasonable interpretation of what this means).
 
 1. Amend the prior query to return a table of all (user, book) pairs that are possibly stolen.  Identify the users and books by name in the query results.
 
@@ -489,7 +489,7 @@ Web Programming
     redbubble_creators('zelda')
     redbubble_creators('eno')
     ```
-1. Add an optional argument, `type`, which will subset the returned artists from the previous query to only those that have a product form the given category.
+1. Add an optional argument, `type`, which will subset the returned artists from the previous query to only those that have a product from the given category.
 
     ```
     # Zelda stickers
