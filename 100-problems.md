@@ -1,5 +1,5 @@
-100 Data Science Programming Problems
-=====================================
+Data Science Programming Problems
+=================================
 
 
 General Programming
