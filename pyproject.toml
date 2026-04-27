@@ -9,6 +9,7 @@ description = "Practice problems and reference solutions for data science progra
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.26",
+    "pandas>=2.2",
 ]
 
 [project.optional-dependencies]
