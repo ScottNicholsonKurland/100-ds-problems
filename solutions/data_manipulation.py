@@ -18,7 +18,7 @@ def num_to_color(arr):
     arr: numpy array
         An array of the strings 'red' and 'blue'.
     """
-    color_arr = np.array(['red', 'blue'])
+    color_arr = np.array(["red", "blue"])
     return color_arr[arr]
 
 
@@ -84,7 +84,7 @@ def offset_diagonals(n):
         Square matrix with ones on diagonals above and below main diagonal.
     """
     final_matrix = np.zeros((n, n))
-    diag_indices1 = np.arange(0, n-1)
+    diag_indices1 = np.arange(0, n - 1)
     diag_indices2 = np.arange(1, n)
     final_matrix[(diag_indices1, diag_indices2)] = 1
     final_matrix[(diag_indices2, diag_indices1)] = 1

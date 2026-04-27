@@ -11,7 +11,6 @@ from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Any
 
-
 VOWELS = set("aeiouAEIOU")
 PASSWORD_SYMBOLS = set("^!#$?-")
 
@@ -23,7 +22,10 @@ def dict_to_list(data: dict[str, Sequence[Any]]) -> list[dict[str, Any]]:
         raise ValueError("All values must have the same length.")
 
     keys = list(data)
-    return [dict(zip(keys, row_values)) for row_values in zip(*data.values())]
+    return [
+        dict(zip(keys, row_values, strict=True))
+        for row_values in zip(*data.values(), strict=True)
+    ]
 
 
 def list_to_dict(rows: Sequence[dict[str, Any]]) -> dict[str, list[Any]]:
@@ -48,7 +50,7 @@ def either_vowel_flags(left: Sequence[str], right: Sequence[str]) -> list[bool]:
     if len(left) != len(right):
         raise ValueError("Input sequences must have the same length.")
 
-    return [(a in VOWELS) or (b in VOWELS) for a, b in zip(left, right)]
+    return [(a in VOWELS) or (b in VOWELS) for a, b in zip(left, right, strict=True)]
 
 
 def group_words_by_first_letter(text: str) -> dict[str, list[str]]:
@@ -96,7 +98,7 @@ def transpose(matrix: Sequence[Sequence[Any]]) -> list[list[Any]]:
     if len(row_lengths) > 1:
         raise ValueError("Matrix must be rectangular.")
 
-    return [list(column) for column in zip(*matrix)]
+    return [list(column) for column in zip(*matrix, strict=True)]
 
 
 def get_valid_passwords(passwords: Iterable[str]) -> list[str]:

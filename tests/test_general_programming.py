@@ -83,12 +83,7 @@ def test_merge_word_files(tmp_path: Path):
     merge_word_files(first_file, second_file, output_file)
 
     assert output_file.read_text(encoding="utf-8") == (
-        "And, This\n"
-        "another, is\n"
-        "a, file\n"
-        "file\n"
-        "of\n"
-        "words\n"
+        "And, This\n" "another, is\n" "a, file\n" "file\n" "of\n" "words\n"
     )
 
 
