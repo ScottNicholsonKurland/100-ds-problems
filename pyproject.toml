@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "100-ds-problems"
 version = "0.1.0"
@@ -12,16 +16,23 @@ dev = [
     "ruff>=0.4",
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["solutions*"]
+exclude = ["img*", "tests*", "problems*"]
+namespaces = false
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
 
 [tool.black]
 line-length = 88
+target-version = ["py312"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py310"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
