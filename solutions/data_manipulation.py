@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
 from typing import Literal
 
 import numpy as np
@@ -134,7 +133,9 @@ def can_multiply_in_order(*matrices: NDArray[np.number]) -> bool:
     if any(len(shape) != 2 for shape in shapes):
         raise ValueError("All inputs must be two-dimensional matrices.")
 
-    return all(left[1] == right[0] for left, right in zip(shapes, shapes[1:]))
+    return all(
+        left[1] == right[0] for left, right in zip(shapes, shapes[1:], strict=False)
+    )
 
 
 def cartesian_to_polar(points: NDArray[np.number]) -> NDArray[np.float64]:

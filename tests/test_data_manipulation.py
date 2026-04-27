@@ -206,7 +206,9 @@ def test_pairwise_distances():
         dtype=float,
     )
 
-    np.testing.assert_allclose(pairwise_distances(first_points, second_points), expected)
+    np.testing.assert_allclose(
+        pairwise_distances(first_points, second_points), expected
+    )
 
 
 def test_pairwise_distances_rejects_dimension_mismatch():
