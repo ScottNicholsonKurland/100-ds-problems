@@ -1,10 +1,35 @@
 # Solutions Style Guide
 
-Submitted solutions need to conform to the following standards:
+Submitted solutions should conform to the following standards.
 
-- Format code with `black`.
-- Lint with `ruff`.
-- Test with `pytest`.
-- Use NumPy-style docstrings for public functions.
-- Docstrings need to conform to [NumPy/SciPy/sklearn conventions](https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt).
-- Solutions should be submitted in a module with a filename that matches that section of questions. For example, solutions for the `General Programming` questions should be submitted in a file named `general_programming.py`.
+## Code Style
+
+- Format Python code with `black`.
+- Lint Python code with `ruff`.
+- Test solutions with `pytest`.
+- Prefer readable solutions over overly clever one-liners.
+- Handle reasonable edge cases explicitly.
+- Raise clear exceptions when invalid input would otherwise produce misleading output.
+
+## Documentation
+
+- Use docstrings for public functions and classes.
+- Prefer NumPy-style docstrings for larger functions and model classes.
+- Include examples when they clarify expected behavior.
+
+## Testing
+
+Each solution should include pytest tests covering:
+
+- the example shown in the problem statement
+- at least one edge case
+- invalid inputs when applicable
+
+## File Organization
+
+Solutions should be submitted in a module whose filename matches the problem section.
+
+For example, solutions for the `General Programming` section should be submitted in:
+
+```text
+solutions/general_programming.py
