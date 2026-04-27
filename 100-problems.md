@@ -103,7 +103,7 @@ Write a Python function to simplify these polynomial data structures by combinin
         => [(2, 0), (2, 1)]
     ```
 
-Notice that if a term in the simplified polynomial has degree zero, you should remove it from the resulting data structure.
+Notice that if a term in the simplified polynomial has a coefficient of zero, you should remove it from the resulting data structure.
 
 1. Using the same representation of polynomials as in the above problem, write a function to compute and simplify the derivative of a polynomial data structure.  If you need a reminder on how to compute the derivative of polynomials, [here](https://www.intmath.com/differentiation/5-derivative-polynomials.php) is a sufficient reference.
 
@@ -273,7 +273,7 @@ Statistics
 
     ```
     H_0: p = proposed_value
-    h_a: p > proposed_value
+    H_a: p > proposed_value
     ```
 
     Where `p` is the population proportion.
@@ -455,7 +455,7 @@ The following problems use tables with the following table schemas for a databas
 |--------------|--------|
 | book_id      | int    |
 | author_id    | int    |
-| genere_id    | int    |
+| genre_id    | int    |
 | publish_date | date   |
 | name         | string |
 
