@@ -1,127 +1,209 @@
-"""Solutions to Data Manipulation section of 100 DS questions set."""
+"""Reference solutions for the NumPy data-manipulation problem set."""
+
+from __future__ import annotations
+
+from collections.abc import Sequence
+from typing import Literal
 
 import numpy as np
+from numpy.typing import NDArray
 
 
-def num_to_color(arr):
-    """Return array replacing 0's with 'red' and 1's are replaced with 'blue'.
+def num_to_color(arr: NDArray[np.integer]) -> NDArray[np.str_]:
+    """Replace 0 with 'red' and 1 with 'blue'."""
+    arr = np.asarray(arr)
 
-    Converts 0's to the string 'red' and 1's to the string 'blue'.
+    if not np.isin(arr, [0, 1]).all():
+        raise ValueError("Input array must contain only 0 and 1.")
 
-    Parameters
-    ----------
-    arr: numpy array
-        An array of 0's and 1's.
+    colors = np.array(["red", "blue"])
+    return colors[arr]
 
-    Returns
-    -------
-    arr: numpy array
-        An array of the strings 'red' and 'blue'.
+
+def compute_part_mean(
+    x: NDArray[np.number],
+    b: NDArray[np.integer],
+) -> dict[int, float]:
+    """Compute means of x where b equals 0 and where b equals 1."""
+    x = np.asarray(x)
+    b = np.asarray(b)
+
+    if x.shape != b.shape:
+        raise ValueError("x and b must have the same shape.")
+
+    if not np.isin(b, [0, 1]).all():
+        raise ValueError("b must contain only 0 and 1.")
+
+    return {
+        0: float(x[b == 0].mean()),
+        1: float(x[b == 1].mean()),
+    }
+
+
+def row_or_column_means(
+    matrix: NDArray[np.number],
+    label: Literal["row", "column"],
+) -> NDArray[np.float64]:
+    """Return row means or column means for a two-dimensional array."""
+    matrix = np.asarray(matrix)
+
+    if matrix.ndim != 2:
+        raise ValueError("matrix must be two-dimensional.")
+
+    if label == "row":
+        return matrix.mean(axis=1)
+
+    if label == "column":
+        return matrix.mean(axis=0)
+
+    raise ValueError("label must be either 'row' or 'column'.")
+
+
+def find_smallest_angle(
+    x: NDArray[np.number],
+    matrix: NDArray[np.number],
+) -> NDArray[np.number]:
+    """Return the row in matrix that forms the smallest angle with x."""
+    x = np.asarray(x)
+    matrix = np.asarray(matrix)
+
+    if matrix.ndim != 2:
+        raise ValueError("matrix must be two-dimensional.")
+
+    if x.ndim != 1:
+        raise ValueError("x must be one-dimensional.")
+
+    if matrix.shape[1] != x.shape[0]:
+        raise ValueError("matrix must have the same number of columns as len(x).")
+
+    x_norm = np.linalg.norm(x)
+    row_norms = np.linalg.norm(matrix, axis=1)
+
+    if x_norm == 0 or np.any(row_norms == 0):
+        raise ValueError("x and all matrix rows must be nonzero vectors.")
+
+    cosine_similarities = matrix @ x / (row_norms * x_norm)
+    return matrix[np.argmax(cosine_similarities)]
+
+
+def offset_diagonals(n: int) -> NDArray[np.float64]:
+    """Create an n-by-n matrix with ones above and below the main diagonal."""
+    if n < 1:
+        raise ValueError("n must be positive.")
+
+    matrix = np.zeros((n, n))
+    indices = np.arange(n - 1)
+
+    matrix[indices, indices + 1] = 1
+    matrix[indices + 1, indices] = 1
+
+    return matrix
+
+
+def cols_with_neg_value(matrix: NDArray[np.number]) -> NDArray[np.number]:
+    """Return columns of matrix where at least one entry is negative."""
+    matrix = np.asarray(matrix)
+
+    if matrix.ndim != 2:
+        raise ValueError("matrix must be two-dimensional.")
+
+    return matrix[:, np.any(matrix < 0, axis=0)]
+
+
+def swap_rows(matrix: NDArray[np.number], i: int, j: int) -> None:
+    """Swap rows i and j of matrix in place."""
+    matrix[[i, j]] = matrix[[j, i]]
+
+
+def checkerboard(n: int) -> NDArray[np.int_]:
+    """Create an n-by-n checkerboard matrix with 1 in the top-left corner."""
+    if n < 1:
+        raise ValueError("n must be positive.")
+
+    indices = np.indices((n, n)).sum(axis=0)
+    return 1 - (indices % 2)
+
+
+def can_multiply_in_order(*matrices: NDArray[np.number]) -> bool:
+    """Return whether matrices can be multiplied in the supplied order."""
+    if len(matrices) < 2:
+        return True
+
+    shapes = [np.asarray(matrix).shape for matrix in matrices]
+
+    if any(len(shape) != 2 for shape in shapes):
+        raise ValueError("All inputs must be two-dimensional matrices.")
+
+    return all(left[1] == right[0] for left, right in zip(shapes, shapes[1:]))
+
+
+def cartesian_to_polar(points: NDArray[np.number]) -> NDArray[np.float64]:
+    """Convert an array of 2D Cartesian points to polar coordinates."""
+    points = np.asarray(points)
+
+    if points.ndim != 2 or points.shape[1] != 2:
+        raise ValueError("points must have shape (n, 2).")
+
+    x_values = points[:, 0]
+    y_values = points[:, 1]
+
+    radii = np.sqrt(x_values**2 + y_values**2)
+    angles = np.arctan2(y_values, x_values)
+
+    return np.column_stack((radii, angles))
+
+
+def project_orthogonal_to_vector(
+    matrix: NDArray[np.number],
+    vector: NDArray[np.number],
+) -> NDArray[np.float64]:
+    """Project 3D points onto the plane orthogonal to vector.
+
+    The problem is under-specified because a 3D-to-2D projection requires
+    choosing a coordinate basis for the target plane. This implementation
+    chooses a deterministic orthonormal basis for that plane.
     """
-    color_arr = np.array(["red", "blue"])
-    return color_arr[arr]
+    matrix = np.asarray(matrix, dtype=float)
+    vector = np.asarray(vector, dtype=float)
+
+    if matrix.ndim != 2 or matrix.shape[1] != 3:
+        raise ValueError("matrix must have shape (n, 3).")
+
+    if vector.shape != (3,):
+        raise ValueError("vector must have shape (3,).")
+
+    vector_norm = np.linalg.norm(vector)
+    if vector_norm == 0:
+        raise ValueError("vector must be nonzero.")
+
+    normal = vector / vector_norm
+
+    helper = np.array([1.0, 0.0, 0.0])
+    if abs(np.dot(helper, normal)) > 0.9:
+        helper = np.array([0.0, 1.0, 0.0])
+
+    basis_1 = helper - np.dot(helper, normal) * normal
+    basis_1 = basis_1 / np.linalg.norm(basis_1)
+    basis_2 = np.cross(normal, basis_1)
+
+    projected_3d = matrix - np.outer(matrix @ normal, normal)
+
+    return np.column_stack((projected_3d @ basis_1, projected_3d @ basis_2))
 
 
-def compute_part_mean(x, b):
-    """Return the mean of x where b == 0 and the mean of x where b == 1.
+def pairwise_distances(
+    first_points: NDArray[np.number],
+    second_points: NDArray[np.number],
+) -> NDArray[np.float64]:
+    """Return pairwise Euclidean distances between two point arrays."""
+    first_points = np.asarray(first_points, dtype=float)
+    second_points = np.asarray(second_points, dtype=float)
 
-    x and b must have equal lengths.
+    if first_points.ndim != 2 or second_points.ndim != 2:
+        raise ValueError("Both inputs must be two-dimensional arrays.")
 
-    Parameters
-    ----------
-    x: numpy array
-        Array of generic numeric data.
-    b: numpy array
-        Array of 0's and 1's.
+    if first_points.shape[1] != second_points.shape[1]:
+        raise ValueError("Both inputs must have the same number of columns.")
 
-    Return
-    ------
-    b_0_mean: float
-        Mean of X at the indices where b == 0.
-    b_1_mean: float
-        Mean of X at the indeices where b == 1.
-    """
-    return x[b == 0].mean(), x[b == 1].mean()
-
-
-def find_smallest_angle(x, M):
-    """Return the row in M that has the smallest angle with x.
-
-    The number of columns in M must equal the length of x.
-
-    Parameters
-    ----------
-    x: numpy array
-        A vector.
-    M: numpy array
-        2 dimensional matrix.
-
-    Returns
-    -------
-    row_i: int
-        The index of the row from M that has the smallest angle with x.
-    row: numpy array
-        The row from M that has the smallest angle with x.
-    """
-    distances = M.dot(x) / (np.linalg.norm(x) * np.linalg.norm(M, axis=1))
-    row_i = distances.argmax()
-    return row_i, M[row_i]
-
-
-def offset_diagonals(n):
-    """Return matrix with ones on the diagonals above and below main diagonal.
-
-    Matrix is a square matrix of shape (n, n).
-
-    Parameters
-    ----------
-    n: int
-        The dimensions of the returned matrix.
-
-    Returns
-    -------
-    final_matrix: numpy array, shape = (n, n)
-        Square matrix with ones on diagonals above and below main diagonal.
-    """
-    final_matrix = np.zeros((n, n))
-    diag_indices1 = np.arange(0, n - 1)
-    diag_indices2 = np.arange(1, n)
-    final_matrix[(diag_indices1, diag_indices2)] = 1
-    final_matrix[(diag_indices2, diag_indices1)] = 1
-    return final_matrix
-
-
-def cols_with_neg_value(M):
-    """Return matrix made of the cols of M where at least one value is <0.
-
-    Parameters
-    ----------
-    M: numpy array
-
-    Returns
-    -------
-    numpy array
-        Matrix containing only cols of M where at least one value is negative.
-    """
-    return M[:, np.min(M, axis=0) < 0]
-
-
-def swap_rows(M, i, j):
-    """Swap the row i with row j in M.
-
-    Modifies M in-place!
-
-    Parameters
-    ----------
-    M: numpy array
-        A matrix of data.
-    i: int
-        Index of first row
-    j: int
-        Index of second row
-
-    Returns
-    -------
-    None
-    """
-    M[[i, j]] = M[[j, i]]
+    differences = first_points[:, np.newaxis, :] - second_points[np.newaxis, :, :]
+    return np.sqrt(np.sum(differences**2, axis=2))
