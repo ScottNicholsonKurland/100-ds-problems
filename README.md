@@ -32,8 +32,22 @@ This repository is a deliberate practice project: each completed section should 
 - Test-driven development with pytest
 - Code formatting and linting with Black and Ruff
 
-## Running the Tests
+- ## Current Quality Checks
+
+This repository currently includes:
+
+- 28 reference solutions
+- 37 pytest tests
+- NumPy and pandas data-manipulation solutions
+- GitHub Actions CI for Black, Ruff, and pytest
+- Local test result: 49 tests passing
+
+The goal is to build the repository gradually into a tested reference set for data science programming practice.
+
+## Running the Checks Locally
 
 ```bash
 python -m pip install -e ".[dev]"
+python -m black --check solutions tests
+python -m ruff check solutions tests
 python -m pytest
