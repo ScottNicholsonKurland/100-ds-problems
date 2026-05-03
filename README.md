@@ -21,6 +21,12 @@ This repository is a deliberate practice project: each completed section should 
 | Web Programming | 5 | 0 | 0 |
 | **Total** | **53** | **45** | **74** |
 
+## Extensions
+
+| Extension | Implementations | Tests |
+|---|---:|---:|
+| scikit-learn algorithm variants | 4 | 10 |
+
 ## Skills Demonstrated
 
 - Python fundamentals
@@ -36,12 +42,12 @@ This repository is a deliberate practice project: each completed section should 
 
 This repository currently includes:
 
-- 45 reference solutions
-- 74 pytest tests
-- Tested solutions for Python fundamentals, NumPy, pandas, probability, statistics, algorithms, and SQL
+- Tested reference solutions for Python fundamentals, NumPy, pandas, probability, statistics, algorithms, and SQL
+- scikit-learn extension implementations for logistic classification, thresholded profit optimization, and hurdle modeling
 - GitHub Actions CI for Black, Ruff, and pytest
 
 The goal is to build the repository gradually into a tested reference set for data science programming practice.
+
 ## Running the Checks Locally
 
 ```bash
