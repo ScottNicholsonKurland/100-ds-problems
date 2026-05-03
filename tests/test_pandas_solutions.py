@@ -101,6 +101,7 @@ def test_stock_price_day_after_max_handles_unsorted_input():
 
     pd.testing.assert_frame_equal(stock_price_day_after_max(stocks), expected)
 
+
 def test_stock_price_day_after_max_returns_empty_if_max_is_final_observation():
     stocks = pd.DataFrame(
         {
