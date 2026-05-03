@@ -1,6 +1,9 @@
 import pytest
 
-from solutions.statistics import binomial_exact_test, test_for_cheating
+from solutions.statistics import (
+    binomial_exact_test,
+    test_for_cheating as detect_cheating,
+)
 
 
 def test_binomial_exact_test():
@@ -51,7 +54,7 @@ def test_binomial_exact_test_rejects_bad_proposed_value():
 
 
 def test_for_cheating_example_scores_not_suspicious():
-    result = test_for_cheating(
+    result = detect_cheating(
         {
             "STR": 11,
             "DEX": "14",
@@ -69,7 +72,7 @@ def test_for_cheating_example_scores_not_suspicious():
 
 
 def test_for_cheating_flags_extremely_high_scores():
-    result = test_for_cheating(
+    result = detect_cheating(
         {
             "STR": 18,
             "DEX": 18,
@@ -87,12 +90,12 @@ def test_for_cheating_flags_extremely_high_scores():
 
 def test_for_cheating_rejects_wrong_number_of_attributes():
     with pytest.raises(ValueError):
-        test_for_cheating({"STR": 10, "DEX": 10})
+        detect_cheating({"STR": 10, "DEX": 10})
 
 
 def test_for_cheating_rejects_invalid_attribute_score():
     with pytest.raises(ValueError):
-        test_for_cheating(
+        detect_cheating(
             {
                 "STR": 19,
                 "DEX": 10,
@@ -101,4 +104,19 @@ def test_for_cheating_rejects_invalid_attribute_score():
                 "WIS": 10,
                 "CHR": 10,
             },
+        )
+
+
+def test_for_cheating_rejects_invalid_alpha():
+    with pytest.raises(ValueError):
+        detect_cheating(
+            {
+                "STR": 10,
+                "DEX": 10,
+                "CON": 10,
+                "INT": 10,
+                "WIS": 10,
+                "CHR": 10,
+            },
+            alpha=1.5,
         )
