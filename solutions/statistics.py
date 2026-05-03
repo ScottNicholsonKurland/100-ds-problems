@@ -131,16 +131,7 @@ def test_for_cheating(
             "a 3d6-per-attribute model."
         )
 
-    return {
-        "scores": parsed_scores,
-        "total_score": total_score,
-        "mean_score": mean_score,
-        "p_value": p_value,
-        "alpha": alpha,
-        "suspicious": suspicious,
-        "reason": reason,
-    }
-
+    
     return {
         "scores": parsed_scores,
         "total_score": total_score,
