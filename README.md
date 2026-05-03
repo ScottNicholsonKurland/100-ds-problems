@@ -16,10 +16,10 @@ This repository is a deliberate practice project: each completed section should 
 | Probability | 4 | 4 | 9 |
 | Statistics | 2 | 2 | 9 |
 | Algorithms | 7 | 7 | 14 |
-| Plotting | 3 | 0 | 0 |
+| Plotting | 3 | 3 | 6 |
 | SQL | 4 | 4 | 5 |
 | Web Programming | 5 | 0 | 0 |
-| **Total** | **53** | **45** | **74** |
+| **Total** | **53** | **48** | **80** |
 
 ## Extensions
 
@@ -42,7 +42,7 @@ This repository is a deliberate practice project: each completed section should 
 
 This repository currently includes:
 
-- Tested reference solutions for Python fundamentals, NumPy, pandas, probability, statistics, algorithms, and SQL
+- Tested reference solutions for Python fundamentals, NumPy, pandas, probability, statistics, algorithms, plotting, and SQL
 - scikit-learn extension implementations for logistic classification, thresholded profit optimization, and hurdle modeling
 - GitHub Actions CI for Black, Ruff, and pytest
 
