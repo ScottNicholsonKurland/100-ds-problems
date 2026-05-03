@@ -9,7 +9,7 @@ This repository is a deliberate practice project: each completed section should 
 | Section | Problems Drafted | Solutions Added | Tests Added |
 |---|---:|---:|---:|
 | General Programming | 13 | 13 | 13 |
-| Data Manipulation - NumPy | 12 | 0 | 0 |
+| Data Manipulation - NumPy | 12 | 12 | 17 |
 | Data Manipulation - pandas | 3 | 0 | 0 |
 | Probability | 4 | 0 | 0 |
 | Statistics | 2 | 0 | 0 |
@@ -17,7 +17,7 @@ This repository is a deliberate practice project: each completed section should 
 | Plotting | 3 | 0 | 0 |
 | SQL | 4 | 0 | 0 |
 | Web Programming | 5 | 0 | 0 |
-| **Total** | **53** | **13** | **13** |
+| **Total** | **53** | **25** | **30** |
 
 ## Skills Demonstrated
 
