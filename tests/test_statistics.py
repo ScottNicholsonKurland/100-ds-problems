@@ -1,13 +1,10 @@
 import pytest
 
-from solutions.statistics import (
-    binomial_exact_test,
-    test_for_cheating as detect_cheating,
-)
+import solutions.statistics as stats
 
 
 def test_binomial_exact_test():
-    result = binomial_exact_test(
+    result = stats.binomial_exact_test(
         n_samples=10,
         n_positive_samples=8,
         proposed_value=0.5,
@@ -17,7 +14,7 @@ def test_binomial_exact_test():
 
 
 def test_binomial_exact_test_with_zero_positive_samples():
-    result = binomial_exact_test(
+    result = stats.binomial_exact_test(
         n_samples=10,
         n_positive_samples=0,
         proposed_value=0.5,
@@ -28,7 +25,7 @@ def test_binomial_exact_test_with_zero_positive_samples():
 
 def test_binomial_exact_test_rejects_bad_sample_count():
     with pytest.raises(ValueError):
-        binomial_exact_test(
+        stats.binomial_exact_test(
             n_samples=0,
             n_positive_samples=0,
             proposed_value=0.5,
@@ -37,7 +34,7 @@ def test_binomial_exact_test_rejects_bad_sample_count():
 
 def test_binomial_exact_test_rejects_bad_positive_count():
     with pytest.raises(ValueError):
-        binomial_exact_test(
+        stats.binomial_exact_test(
             n_samples=10,
             n_positive_samples=11,
             proposed_value=0.5,
@@ -46,7 +43,7 @@ def test_binomial_exact_test_rejects_bad_positive_count():
 
 def test_binomial_exact_test_rejects_bad_proposed_value():
     with pytest.raises(ValueError):
-        binomial_exact_test(
+        stats.binomial_exact_test(
             n_samples=10,
             n_positive_samples=8,
             proposed_value=1.5,
@@ -54,7 +51,7 @@ def test_binomial_exact_test_rejects_bad_proposed_value():
 
 
 def test_for_cheating_example_scores_not_suspicious():
-    result = detect_cheating(
+    result = stats.test_for_cheating(
         {
             "STR": 11,
             "DEX": "14",
@@ -72,7 +69,7 @@ def test_for_cheating_example_scores_not_suspicious():
 
 
 def test_for_cheating_flags_extremely_high_scores():
-    result = detect_cheating(
+    result = stats.test_for_cheating(
         {
             "STR": 18,
             "DEX": 18,
@@ -90,12 +87,12 @@ def test_for_cheating_flags_extremely_high_scores():
 
 def test_for_cheating_rejects_wrong_number_of_attributes():
     with pytest.raises(ValueError):
-        detect_cheating({"STR": 10, "DEX": 10})
+        stats.test_for_cheating({"STR": 10, "DEX": 10})
 
 
 def test_for_cheating_rejects_invalid_attribute_score():
     with pytest.raises(ValueError):
-        detect_cheating(
+        stats.test_for_cheating(
             {
                 "STR": 19,
                 "DEX": 10,
@@ -109,7 +106,7 @@ def test_for_cheating_rejects_invalid_attribute_score():
 
 def test_for_cheating_rejects_invalid_alpha():
     with pytest.raises(ValueError):
-        detect_cheating(
+        stats.test_for_cheating(
             {
                 "STR": 10,
                 "DEX": 10,
