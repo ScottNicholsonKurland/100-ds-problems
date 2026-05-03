@@ -26,6 +26,7 @@ This repository is a deliberate practice project: each completed section should 
 | Extension | Implementations | Tests |
 |---|---:|---:|
 | scikit-learn algorithm variants | 4 | 10 |
+| Network science graph analytics | 10 | 12 |
 
 ## Skills Demonstrated
 
@@ -44,6 +45,7 @@ This repository currently includes:
 
 - Tested reference solutions for Python fundamentals, NumPy, pandas, probability, statistics, algorithms, plotting, SQL, and web programming
 - scikit-learn extension implementations for logistic classification, thresholded profit optimization, and hurdle modeling
+- Network science extension implementations for graph construction, graph metrics, random networks, preferential attachment, centrality, robustness, and community detection
 - GitHub Actions CI for Black, Ruff, and pytest
 
 The goal is to build the repository gradually into a tested reference set for data science programming practice.
