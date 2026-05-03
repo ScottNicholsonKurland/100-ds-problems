@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "100-ds-problems"
 version = "0.1.0"
 description = "Practice problems and reference solutions for data science programming fundamentals."
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
     "numpy>=1.26",
     "pandas>=2.2",
