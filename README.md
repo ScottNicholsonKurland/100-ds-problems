@@ -15,11 +15,11 @@ This repository is a deliberate practice project: each completed section should 
 | Data Manipulation - pandas | 3 | 3 | 7 |
 | Probability | 4 | 4 | 9 |
 | Statistics | 2 | 2 | 9 |
-| Algorithms | 7 | 0 | 0 |
+| Algorithms | 7 | 7 | 14 |
 | Plotting | 3 | 0 | 0 |
 | SQL | 4 | 4 | 5 |
 | Web Programming | 5 | 0 | 0 |
-| **Total** | **53** | **38** | **60** |
+| **Total** | **53** | **45** | **74** |
 
 ## Skills Demonstrated
 
@@ -36,13 +36,12 @@ This repository is a deliberate practice project: each completed section should 
 
 This repository currently includes:
 
-- 38 reference solutions
-- 60 pytest tests
-- Tested solutions for Python fundamentals, NumPy, pandas, probability, statistics, and SQL
+- 45 reference solutions
+- 74 pytest tests
+- Tested solutions for Python fundamentals, NumPy, pandas, probability, statistics, algorithms, and SQL
 - GitHub Actions CI for Black, Ruff, and pytest
 
 The goal is to build the repository gradually into a tested reference set for data science programming practice.
-
 ## Running the Checks Locally
 
 ```bash
