@@ -17,9 +17,9 @@ This repository is a deliberate practice project: each completed section should 
 | Statistics | 2 | 0 | 0 |
 | Algorithms | 7 | 0 | 0 |
 | Plotting | 3 | 0 | 0 |
-| SQL | 4 | 0 | 0 |
+| SQL | 4 | 4 | 5 |
 | Web Programming | 5 | 0 | 0 |
-| **Total** | **53** | **28** | **37** |
+| **Total** | **53** | **32** | **42** |
 
 ## Skills Demonstrated
 
