@@ -13,13 +13,13 @@ This repository is a deliberate practice project: each completed section should 
 | General Programming | 13 | 13 | 13 |
 | Data Manipulation - NumPy | 12 | 12 | 17 |
 | Data Manipulation - pandas | 3 | 3 | 7 |
-| Probability | 4 | 0 | 0 |
+| Probability | 4 | 4 | 9 |
 | Statistics | 2 | 0 | 0 |
 | Algorithms | 7 | 0 | 0 |
 | Plotting | 3 | 0 | 0 |
 | SQL | 4 | 4 | 5 |
 | Web Programming | 5 | 0 | 0 |
-| **Total** | **53** | **32** | **42** |
+| **Total** | **53** | **36** | **51** |
 
 ## Skills Demonstrated
 
