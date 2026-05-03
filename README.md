@@ -1,5 +1,7 @@
 # 100 Data Science Programming Problems
 
+![Python checks](https://github.com/ScottNicholsonKurland/100-ds-problems/actions/workflows/tests.yml/badge.svg)
+
 A structured collection of Python, data manipulation, statistics, modeling, SQL, plotting, and web-programming exercises for building practical data science and data analyst skills.
 
 This repository is a deliberate practice project: each completed section should include problem statements, readable reference solutions, and pytest coverage.
