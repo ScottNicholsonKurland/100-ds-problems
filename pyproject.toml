@@ -11,7 +11,9 @@ dependencies = [
     "numpy>=1.26",
     "pandas>=2.2",
     "scikit-learn>=1.6",
-    "matplotlib>="3.8",
+    "matplotlib>=3.8",
+    "requests>=2.31",
+    "beautifulsoup>="4.12",
 ]
 
 [project.optional-dependencies]
