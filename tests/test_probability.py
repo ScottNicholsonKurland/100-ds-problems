@@ -76,11 +76,14 @@ def test_joke_unique_count_likelihood_for_four_visits_three_unique():
 
 
 def test_estimate_total_jokes_mle_for_four_visits_three_unique():
-    assert estimate_total_jokes_mle(
-        n_visits=4,
-        n_unique_seen=3,
-        max_jokes=100,
-    ) == 5
+    assert (
+        estimate_total_jokes_mle(
+            n_visits=4,
+            n_unique_seen=3,
+            max_jokes=100,
+        )
+        == 5
+    )
 
 
 def test_estimate_total_jokes_mle_rejects_all_unique_case():

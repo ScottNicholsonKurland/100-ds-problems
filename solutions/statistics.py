@@ -122,16 +122,13 @@ def test_for_cheating(
     suspicious = p_value < alpha
 
     if suspicious:
-        reason = (
-            "The total score is unusually high under a 3d6-per-attribute model."
-        )
+        reason = "The total score is unusually high under a 3d6-per-attribute model."
     else:
         reason = (
             "No strong evidence that the total score is unusually high under "
             "a 3d6-per-attribute model."
         )
 
-    
     return {
         "scores": parsed_scores,
         "total_score": total_score,

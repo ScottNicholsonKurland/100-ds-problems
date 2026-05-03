@@ -129,9 +129,7 @@ def _stirling_second_kind(n_items: int, n_groups: int) -> int:
         return 0
 
     return sum(
-        (-1) ** (n_groups - j)
-        * comb(n_groups, j)
-        * j**n_items
+        (-1) ** (n_groups - j) * comb(n_groups, j) * j**n_items
         for j in range(n_groups + 1)
     ) // factorial(n_groups)
 
