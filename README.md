@@ -1,10 +1,10 @@
 # 100 Data Science Programming Problems
 
-A structured collection of programming, data manipulation, statistics, modeling, SQL, plotting, and web programming exercises for building practical data science and data analyst skills.
+A structured collection of Python, data manipulation, statistics, modeling, SQL, plotting, and web-programming exercises for building practical data science and data analyst skills.
 
-**Status:** 53 / 100 problems drafted. Reference solutions and pytest coverage have been started for the General Programming section.
+This repository is a deliberate practice project: each completed section should include problem statements, readable reference solutions, and pytest coverage.
 
-## Progress
+## Status
 
 | Section | Problems Drafted | Solutions Added | Tests Added |
 |---|---:|---:|---:|
@@ -19,49 +19,19 @@ A structured collection of programming, data manipulation, statistics, modeling,
 | Web Programming | 5 | 0 | 0 |
 | **Total** | **53** | **13** | **13** |
 
+## Skills Demonstrated
+
+- Python fundamentals
+- Data structures
+- Algorithmic problem solving
+- NumPy and pandas practice
+- Statistics and probability exercises
+- SQL query practice
+- Test-driven development with pytest
+- Code formatting and linting with Black and Ruff
+
 ## Running the Tests
 
 ```bash
-python -m pip install -e '.[dev]'
+python -m pip install -e ".[dev]"
 python -m pytest
-```
-
-## Repository Structure
-
-```text
-.
-├── README.md
-├── pyproject.toml
-├── problems/
-│   ├── general_programming.md
-│   ├── numpy.md
-│   ├── pandas.md
-│   ├── probability.md
-│   ├── statistics.md
-│   ├── algorithms.md
-│   ├── plotting.md
-│   ├── sql.md
-│   └── web_programming.md
-├── solutions/
-│   ├── __init__.py
-│   └── general_programming.py
-├── tests/
-│   └── test_general_programming.py
-└── solutions_style_guide.md
-```
-
-## Problem Sections
-
-- [General Programming](problems/general_programming.md)
-- [Data Manipulation - NumPy](problems/numpy.md)
-- [Data Manipulation - pandas](problems/pandas.md)
-- [Probability](problems/probability.md)
-- [Statistics](problems/statistics.md)
-- [Algorithms](problems/algorithms.md)
-- [Plotting](problems/plotting.md)
-- [SQL](problems/sql.md)
-- [Web Programming](problems/web_programming.md)
-
-## Submitting Solutions
-
-Solutions submitted to this repo should conform to the [solutions style guide](solutions_style_guide.md).
