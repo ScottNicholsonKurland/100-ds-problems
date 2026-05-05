@@ -4,7 +4,7 @@ These extension problems are inspired by the topic sequence in Allen B. Downey's
 
 The goal is to add a statistics-heavy track that emphasizes practical data analysis in Python: exploratory data analysis, distributions, PMFs, CDFs, modeling distributions, relationships between variables, estimation, hypothesis testing, regression, time series, survival analysis, and analytic methods.
 
-## Suggested implementation structure
+## Implementation structure
 
 ```text
 solutions/think_stats.py
