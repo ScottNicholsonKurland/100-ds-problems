@@ -26,7 +26,7 @@ This repository is a deliberate practice project: each completed section should 
 | Extension | Implementations | Tests |
 |---|---:|---:|
 | scikit-learn algorithm variants | 4 | 10 |
-| Network science graph analytics | 10 | 12 |
+| Network science graph analytics | 11 | 13 |
 | Think Stats-inspired statistical programming | 30 | 51 |
 | Think Bayes-inspired Bayesian inference | 30 | 50 |
 
@@ -61,3 +61,4 @@ python -m pip install -e ".[dev]"
 python -m black --check solutions tests
 python -m ruff check solutions tests
 python -m pytest
+```
